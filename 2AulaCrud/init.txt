@@ -1,0 +1,6 @@
+npm init -y
+npm i -d typescript ts-node @types/node @types/express
+
+npx ts-node src/main.ts => para rodar typescript
+"start": "npx ts-node src/main.ts" em "script" para que o npm start funcione com JIT
+
