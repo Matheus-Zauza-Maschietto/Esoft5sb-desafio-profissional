@@ -1,4 +1,4 @@
-import { User } from "src/Models/user";
+import { User } from "../Models/user";
 import { Categoria } from "../Models/categoria";
 import categoriaRepository, { CategoriaRepository } from "../Repositories/categoriaRepository";
 import userRepository, { UserRepository } from "../Repositories/userRepository";

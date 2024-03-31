@@ -43,11 +43,7 @@ export class CategoriaRepository{
 
     public async updateCategoriasById(id: number, categoria: Categoria): Promise<any>
     {
-        return await this.categoriaDataSource.createQueryBuilder()
-        .update()
-        .set({nome: categoria.nome, cor: categoria.cor})
-        .where("id = :id", { id: Number(id) })
-        .execute()
+        return await this.categoriaDataSource.save(categoria)
     }
     
 }
