@@ -1,14 +1,20 @@
+import statusRepository, { StatusRepository } from "../Repositories/statusRepository";
 import { Tarefa } from "../Models/tarefa";
 import { User } from "../Models/user";
 import tarefaRepository, { TarefaRepository } from "../Repositories/tarefaRepository";
 import userRepository, { UserRepository } from "../Repositories/userRepository";
+import categoriaRepository, { CategoriaRepository } from "../Repositories/categoriaRepository";
 
 export class TarefaService{
     private readonly tarefaRepository: TarefaRepository;
+    private readonly statusRepository: StatusRepository;
+    private readonly categoriaRepository: CategoriaRepository;
     private readonly userRepository: UserRepository;
     constructor(){
         this.tarefaRepository = tarefaRepository;
         this.userRepository = userRepository;
+        this.statusRepository = statusRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     public async createTarefa(body: any, user: User): Promise<Tarefa>{
@@ -17,14 +23,25 @@ export class TarefaService{
         newTarefa.titulo = body.titulo;
         newTarefa.dataCriacao = body.dataCriacao;
         newTarefa.dataConclusao = body.dataConclusao;
-        newTarefa.categoria = body.categoria;
-        newTarefa.status = body.status;
         newTarefa.responsavel = user;
+
+        const categoria = await categoriaRepository.getCategoriasByUserAndId(user, body.categoriaId);
+        if(categoria == null ){
+            throw new Error("Categoria não encontrada.");
+        }
         
+        const status = await statusRepository.getStatusById(body.statusId);
+        if(status == null){
+            throw new Error("Status não encontrado.");
+        }
+        
+        newTarefa.categoria = categoria;
+        newTarefa.status = status;
         newTarefa = await tarefaRepository.createTarefa(newTarefa);
         if(newTarefa == null){
             throw new Error("Erro ao criar tarefa");
         }
+
         return newTarefa;
     }
 
