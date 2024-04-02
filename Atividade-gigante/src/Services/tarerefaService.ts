@@ -72,8 +72,16 @@ export class TarefaService{
         tarefa.titulo = body.titulo;
         tarefa.dataCriacao = body.dataCriacao;
         tarefa.dataConclusao = body.dataConclusao;
-        tarefa.categoria = body.categoria;
-        tarefa.status = body.status;
+        
+        const categoria = await categoriaRepository.getCategoriasByUserAndId(user, body.categoriaId);
+        if(categoria == null ){
+            throw new Error("Categoria não encontrada.");
+        }
+        
+        const status = await statusRepository.getStatusById(body.statusId);
+        if(status == null){
+            throw new Error("Status não encontrado.");
+        }
         tarefa.responsavel = user;
         
         tarefa = await tarefaRepository.updateTarefa(tarefa);
