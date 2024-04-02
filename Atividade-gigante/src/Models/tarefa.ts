@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "ty
 import { User } from "./user";
 import { Categoria } from "./categoria";
 import { Status } from "./status";
-import { Tipo } from "./tipo";
+//import { Tipo } from "./tipo";
 
 @Entity()
 export class Tarefa{
@@ -33,7 +33,7 @@ export class Tarefa{
     @JoinColumn()
     status: Status;
 
-    @OneToOne(() => Tipo)
-    @JoinColumn()
-    tipo: Tipo;
+    // @OneToOne(() => Tipo)
+    // @JoinColumn()
+    // tipo: Tipo;
 }

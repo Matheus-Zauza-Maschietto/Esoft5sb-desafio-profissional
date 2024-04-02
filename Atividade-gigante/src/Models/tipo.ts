@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+// import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity()
-export class Tipo {
-    @PrimaryGeneratedColumn()
-    id: number;
+// @Entity()
+// export class Tipo {
+//     @PrimaryGeneratedColumn()
+//     id: number;
 
-    @Column()
-    nome: string;
-}
+//     @Column()
+//     nome: string;
+// }
