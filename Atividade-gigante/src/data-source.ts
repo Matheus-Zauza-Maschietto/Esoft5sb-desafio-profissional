@@ -3,7 +3,6 @@ import { User } from "./Models/user";
 import { Categoria } from "./Models/categoria";
 import { Tarefa } from "./Models/tarefa";
 import { Status } from "./Models/status";
-import { Tipo } from "./Models/tipo";
 
 export const AppDataSource = new DataSource({
     type: "mssql",
@@ -14,7 +13,7 @@ export const AppDataSource = new DataSource({
     database: "PROJETO_BUSSOLA",
     synchronize: true,
     logging: true,
-    entities: [User, Categoria, Tarefa, Status, Tipo],
+    entities: [User, Categoria, Tarefa, Status],
     subscribers: [],
     migrations: [],
     extra: {
